@@ -2,3 +2,6 @@ name = "VCSMD"
 uuid = "4b3de286-0307-11e9-2498-f9aa7c7337d0"
 authors = ["Qi Zhang <singularitti@outlook.com>"]
 version = "0.1.0"
+
+[deps]
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
