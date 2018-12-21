@@ -14,12 +14,27 @@ module Thermostat
 using Distributions: Normal
 using StaticArrays: SVector, SMatrix, MVector, MMatrix
 
-export andersen_heat_bath,
-    homogeneous_atomic_gas_energy,
+export homogeneous_atomic_gas_energy,
+    andersen_heat_bath,
     perform_stochastic_collision,
     velocity_after_collision
 
 const Boltzmann = 1
+
+"""
+    homogeneous_atomic_gas_energy(atomic_mass, velocities)
+
+# e.g., v_i = v_{ix}^2 + v_{iy}^2 + v_{iz}^2 if `D` is `3`
+# m_i v_i^2 for the atoms of an element
+
+# Arguments
+- `atomic_mass::Float64`:
+- `velocities::SMatrix{N, D, Float64}`: `N` is the number of atoms of an element, `D` is the the
+  dimensionality of the problem.
+"""
+function homogeneous_atomic_gas_energy(atomic_mass::Float64, v::SMatrix{N, D, Float64})::Float64 where {N, D}
+    atomic_mass * sum(v .^ 2)
+end
 
 """
     andersen_heat_bath(energy, atoms_amount[, dimension])
@@ -35,21 +50,6 @@ function andersen_heat_bath(energy::Float64, atoms_amount::Int, dimension::Int =
     instantaneous_temperature = energy / (Boltzmann * dimension * atoms_amount)
     σ = sqrt(instantaneous_temperature)  # Standard deviation of temperature
     Normal(0, σ)
-end
-
-"""
-    homogeneous_atomic_gas_energy(atomic_mass, velocities)
-
-# e.g., v_i = v_{ix}^2 + v_{iy}^2 + v_{iz}^2 if `D` is `3`
-# m_i v_i^2 for the atoms of an element
-
-# Arguments
-- `atomic_mass::Float64`:
-- `velocities::SMatrix{N, D, Float64}`: `N` is the number of atoms of an element, `D` is the the
-  dimensionality of the problem.
-"""
-function homogeneous_atomic_gas_energy(atomic_mass::Float64, v::SMatrix{N, D, Float64})::Float64 where {N, D}
-    atomic_mass * sum(v .^ 2)
 end
 
 """
