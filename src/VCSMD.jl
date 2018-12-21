@@ -1,5 +1,5 @@
 module VCSMD
 
-greet() = print("Hello World!")
+include("Thermostat.jl")
 
 end # module
