@@ -1,5 +1,5 @@
 """
-# module Thermostat
+# module Thermostats
 
 
 
@@ -9,7 +9,7 @@
 julia>
 ```
 """
-module Thermostat
+module Thermostats
 
 using Distributions: Normal
 using StaticArrays: SVector, SMatrix, MVector, MMatrix

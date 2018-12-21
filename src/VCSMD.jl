@@ -1,5 +1,5 @@
 module VCSMD
 
-include("Thermostat.jl")
+include("Thermostats.jl")
 
 end # module
