@@ -17,7 +17,7 @@ using StaticArrays: SVector, SMatrix, MVector, MMatrix
 export homogeneous_atomic_gas_energy,
     andersen_heat_bath,
     perform_stochastic_collision,
-    velocity_after_collision
+    velocities_after_collision
 
 const Boltzmann = 1
 
@@ -70,10 +70,10 @@ function perform_stochastic_collision(rng, ν::Float64, dt::Float64, atoms_amoun
 end
 
 """
-    velocity_after_collision(atomic_mass, v, ν, dt)
+    velocities_after_collision(atomic_mass, v, ν, dt)
 
 """
-function velocity_after_collision(atomic_mass::Float64, v::SMatrix{N, D, Float64}, ν::Float64, dt::Float64)::SMatrix{N, D, Float64} where {N, D}
+function velocities_after_collision(atomic_mass::Float64, v::SMatrix{N, D, Float64}, ν::Float64, dt::Float64)::SMatrix{N, D, Float64} where {N, D}
     energy = homogeneous_atomic_gas_energy(atomic_mass, v)
     rng = andersen_heat_bath(energy, N, D)
     result = MMatrix(v)
