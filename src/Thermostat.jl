@@ -58,27 +58,29 @@ end
 Perform one stochastic collision with the heat bath.
 
 # Arguments
-- `energy::Float64`:
-- `ν::Float64`: `N` is the number of atoms of an element, `D` is the the
-  dimensionality of the problem.
-- `dt::Float64`:
+- `rng`: a random number generator with normal distribution.
+- `ν::Float64`: the collision frequency.
+- `dt::Float64`: the time between two consecutive collisions.
+- `atoms_amount::Int`: the number of atoms of an element.
 - `dimension::Int=3`: the dimensionality of the problem.
 """
-function perform_stochastic_collision(energy::Float64, ν::Float64, dt::Float64, dimension::Int = 3)::Vector{Tuple{Int, Float64}} where {N}
-    normal_distribution_random_number_generator = andersen_heat_bath(energy, N, dimension)
+function perform_stochastic_collision(rng, ν::Float64, dt::Float64, atoms_amount::Int, dimension::Int = 3)::Vector{Tuple{Int, Float64}}
     probability = ν * dt  # The probability that a particle is selected in a time step of length Δt
-    [rand() < probability && (i, rand(normal_distribution_random_number_generator)) for i in 1:N]
+    [rand() < probability && (i, rand(rng) / sqrt(dimension)) for i in 1:atoms_amount]
 end
 
 """
+    velocity_after_collision(atomic_mass, v, ν, dt)
+
 """
 function velocity_after_collision(atomic_mass::Float64, v::SMatrix{N, D, Float64}, ν::Float64, dt::Float64)::SMatrix{N, D, Float64} where {N, D}
     energy = homogeneous_atomic_gas_energy(atomic_mass, v)
-    v = MMatrix(v)
-    for (i, velocity) in perform_stochastic_collision(energy, ν, dt, D)
-        v[i, :] .= velocity / sqrt(D)
+    rng = andersen_heat_bath(energy, N, D)
+    result = MMatrix(v)
+    for (i, velocity) in perform_stochastic_collision(rng, ν, dt, N, D)
+        result[i, :] .= velocity
     end
-    v
+    result
 end
 
 end
