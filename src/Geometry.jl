@@ -21,6 +21,7 @@ export Point,
     volume,
     metric_tensor,
     inverse_metric_tensor,
+    metric_tensor_velocity,
     reciprocalcell
 
 abstract type Point{N, Float64} <: FieldVector{N, Float64} end
@@ -43,6 +44,8 @@ volume(c::Cell)::Float64 = (abs ∘ det)(c)
 metric_tensor(c::Cell) = transpose(c) * c
 
 inverse_metric_tensor(c::Cell) = (inv ∘ metric_tensor)(c)
+
+metric_tensor_velocity(c::Cell, c_derivative::Cell) = transpose(c_derivative) * c + c * transpose(c_derivative)
 
 reciprocalcell(c::Cell) = 2π * (transpose ∘ inv)(c)
 
