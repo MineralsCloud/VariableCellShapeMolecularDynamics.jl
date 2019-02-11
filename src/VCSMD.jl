@@ -1,5 +1,8 @@
 module VCSMD
 
-greet() = print("Hello World!")
+include("Geometry.jl")
+include("Force.jl")
+include("Integrators.jl")
+include("Thermostats.jl")
 
 end # module

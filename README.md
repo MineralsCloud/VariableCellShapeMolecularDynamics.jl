@@ -1,1 +1,1 @@
-# VCSMD.jl
+# VariableCellShapeMolecularDynamics.jl

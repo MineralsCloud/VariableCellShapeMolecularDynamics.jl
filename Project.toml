@@ -1,4 +1,9 @@
-name = "VCSMD"
-uuid = "4b3de286-0307-11e9-2498-f9aa7c7337d0"
+name = "VariableCellShapeMolecularDynamics"
+uuid = "8437d1e4-2dbb-11e9-07de-cf943d0814ba"
 authors = ["Qi Zhang <singularitti@outlook.com>"]
 version = "0.1.0"
+
+[deps]
+Distances = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
