@@ -1,4 +1,4 @@
-module VCSMD
+module VariableCellShapeMolecularDynamics
 
 include("Geometry.jl")
 include("Force.jl")
