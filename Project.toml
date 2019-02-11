@@ -1,5 +1,5 @@
-name = "VCSMD"
-uuid = "4b3de286-0307-11e9-2498-f9aa7c7337d0"
+name = "VariableCellShapeMolecularDynamics"
+uuid = "8437d1e4-2dbb-11e9-07de-cf943d0814ba"
 authors = ["Qi Zhang <singularitti@outlook.com>"]
 version = "0.1.0"
 
